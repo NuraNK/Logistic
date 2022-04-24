@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Badges {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<title></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <br/>
+<style type="text/css">
+<!--
+	p {margin: 0; padding: 0;}	.ft10{font-size:22px;font-family:Times;color:#4a4a4a;}
+	.ft11{font-size:15px;font-family:Times;color:#000000;}
+	.ft12{font-size:15px;font-family:Times;color:#ffffff;}
+	.ft13{font-size:39px;font-family:Times;color:#ffffff;}
+	.ft14{font-size:12px;font-family:Times;color:#a8a8a8;}
+	.ft15{font-size:12px;font-family:Times;color:#000000;}
+	.ft16{font-size:15px;line-height:18px;font-family:Times;color:#000000;}
+-->
+</style>
+</head>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+<div id="page1-div" style="position:relative;width:552px;height:808px;">
+<img width="552" height="808" src="/static/assets/images/target001.png" alt="background image"/>
+<p style="position:absolute;top:104px;left:36px;white-space:nowrap" class="ft10">{{ check.company }}</p>
+<p style="position:absolute;top:156px;left:36px;white-space:nowrap" class="ft16">&#160;Оплата заказа на {{ check.obiem }} л {{ check.tovar }}</p>
+<p style="position:absolute;top:235px;left:36px;white-space:nowrap" class="ft12">Платеж&#160;успешно&#160;совершен</p>
+<p style="position:absolute;top:250px;left:36px;white-space:nowrap" class="ft13">{{ check.price_check }}&#160;₸</p>
+<p style="position:absolute;top:319px;left:36px;white-space:nowrap" class="ft14">№&#160;квитанции</p>
+<p style="position:absolute;top:319px;left:230px;white-space:nowrap" class="ft15">210108654709</p>
+<p style="position:absolute;top:352px;left:36px;white-space:nowrap" class="ft14">Комиссия</p>
+<p style="position:absolute;top:352px;left:289px;white-space:nowrap" class="ft15">0&#160;₸</p>
+<p style="position:absolute;top:386px;left:36px;white-space:nowrap" class="ft14">Дата&#160;платежа</p>
+<p style="position:absolute;top:386px;left:200px;white-space:nowrap" class="ft15">{{ check.date }}</p>
+<p style="position:absolute;top:419px;left:36px;white-space:nowrap" class="ft14">ФИО&#160;плательщика</p>
+<p style="position:absolute;top:419px;left:215px;white-space:nowrap" class="ft15">&#160;ТОО {{ check.company }}</p>
+<p style="position:absolute;top:452px;left:36px;white-space:nowrap" class="ft14">Оплачено&#160;с</p>
+<p style="position:absolute;top:452px;left:204px;white-space:nowrap" class="ft15">Kaspi&#160;Gold&#160;&#160;</p>
+</div>
+</body>
+</html>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

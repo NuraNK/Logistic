@@ -1,0 +1,262 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+    <style>* {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-size: 16px;
+        font-family: Helvetica;
+        background: #ECF0F1;
+    }
+
+    .wrap {
+        max-width: 660px;
+        margin: 50px auto 0 auto;
+        text-align: center;
+    }
+
+    .box {
+        display: inline-block;
+        margin: 0 5px;
+        {#width: 250px;#}
+        background: white;
+        text-align: center;
+        {#padding: 20px;#}
+        border-radius: 10px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .blue {
+        background: #93C5C2;
+    }
+
+    h1 {
+        margin: 20px 0;
+        font-size: 1.3em;
+        color: #333333;
+    }
+
+    h2 {
+        font-size: 0.8em;
+        color: #666666;
+        font-weight: 100;
+        letter-spacing: 1px;
+    }
+
+    .price {
+        height: 110px;
+        width: 110px;
+        text-align: center;
+        background-color: #EC351D;
+        border-radius: 50%;
+        line-height: 110px;
+        color: #FFF;
+        font-size: 1.4em;
+        font-weight: 100;
+        margin: 20px auto;
+    }
+
+    .blue .price {
+        background: white;
+        color: #333333;
+    }
+
+    .blue h1, .blue h2, .blue p {
+        color: white;
+    }
+
+    .about {
+        margin: 10px 0px;
+        padding-bottom: 10px;
+        font-weight: 100;
+        font-size: 0.8em;
+        color: #888888;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+        text-decoration: none;
+        display: inline-block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background: #EC351D;
+        border-radius: 5px;
+        color: white;
+        font-size: 0.75em;
+        font-weight: 100;
+        transition: 0.7s ease-in-out;
+    }
+
+    .button:hover {
+        background: #A52514
+    }</style>
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Заказать товар</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i
+                                        class="feather icon-home"></i></a></li>
+{#                                <li class="breadcrumb-item"><a#}
+{#                                        href="javascript:">Sample Page</a></li>#}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+
+                                <div class="wrap">
+                                    <h3>Прайс Лист</h3>
+                                    {% for i in tovar %}
+                                        <div class="card box">
+                                            <h1>{{ i.name }}</h1>
+                                            <h2>Цена за литр</h2>
+                                            <p class="price">{{ i.price }}тг</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+
+                                <div class="card-header">
+                                    <h5>Сделать Заказ</h5>
+                                    <form method="post"
+                                          action="{% url 'create-zakaz' %}">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    {% for f in zakaz %}
+                                                        <p class="">{{ f | as_crispy_field }}</p>
+                                                    {% endfor %}
+                                                    <button type="submit">
+                                                        Заказать
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-md-6">
+        <div class="card Recent-Users">
+            <div class="card-header">
+                <h5>Заказы</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                                                <thead class="text-primary">
+                            <th>
+                               #
+                            </th>
+                            <th>
+                                Компания
+                            </th>
+                            <th>
+                                Адресс
+                            </th>
+                            <th>
+                                дата заказа
+                            </th>
+                            <th>
+                                статус заказа
+                            </th>
+                            </thead>
+                        <tbody>
+                        {% for i in list_zakaz %}
+                            <tr class="unread">
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <td><img class="rounded-circle"
+                                             style="width:40px;"
+                                             src="/static/assets/images/user/avatar-1.jpg"
+                                             alt="activity-user"></td>
+                                    <td>
+                                </a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <h6 class="mb-1">{{ i.company }}</h6></a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <p class="m-0">{{ i.tovar }}</p></a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <p class="m-0">{{ i.obiem }}
+                                        л</p></a>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i
+                                            class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ i.date }}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i
+                                            class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ i.tovar.price }}
+                                        тг
+                                    </h6>
+                                </td>
+                                {% if i.status == 'Принято' %}
+                                    <td>
+                                        <a href="{% url 'check-zakaz' pk=i.pk %}"
+                                           class="label theme-bg text-white f-12">{{ i.status }}</a>
+                                    </td>
+                                {% endif %}
+                                {% if i.status == 'Ожидается' %}
+                                    <td>
+                                        <a href="{% url 'check-zakaz' pk=i.pk %}"
+                                           class="label theme-bg2 text-white f-12">{{ i.status }}</a>
+                                    </td>
+                                {% endif %}
+                                {% if i.status == 'Ожидается' %}
+                                    <td>
+                                        <a href="{% url 'delete-zakaz' pk=i.pk %}" style="color: red;">
+                                        <div class="d-flex justify-content-center">
+                                            <button class="btn btn-info"
+                                                    type="submit">Удалить
+                                            </button>
+                                        </div></a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+
+                            </tbody>
+
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

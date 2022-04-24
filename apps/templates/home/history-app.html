@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="col-xl-8 col-md-6">
+        <div class="card Recent-Users">
+            <div class="card-header">
+                <h5>Recent Users</h5>
+            </div>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                        {% for i in list_zakaz %}
+                            <tr class="unread">
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <td><img class="rounded-circle"
+                                             style="width:40px;"
+                                             src="/static/assets/images/user/avatar-1.jpg"
+                                             alt="activity-user"></td>
+                                    <td>
+                                </a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <h6 class="mb-1">{{ i.company }}</h6></a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <p class="m-0">{{ i.tovar }}</p></a>
+                                <a href="{% url 'check-zakaz' pk=i.pk %}">
+                                    <p class="m-0">{{ i.obiem }}
+                                        л</p></a>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i
+                                            class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ i.date }}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-muted"><i
+                                            class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ i.tovar.price }} тг
+                                    </h6>
+                                </td>
+                                {% if i.status == 'Принято' %}
+                                    <td><a href="{% url 'check-zakaz' pk=i.pk %}"
+                                           class="label theme-bg text-white f-12">{{ i.status }}</a>
+                                    </td>
+                                {% endif %}
+                                {% if i.status == 'Ожидается' %}
+                                    <td><a href="{% url 'check-zakaz' pk=i.pk %}"
+                                           class="label theme-bg2 text-white f-12">{{ i.status }}</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

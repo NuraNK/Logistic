@@ -1,0 +1,122 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Page Blank {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+{#    <div class="col-xl-12 col-md-6">#}
+{#        <div class="card Recent-Users">#}
+{#            <div class="card-header">#}
+{#                <h5>Статистика Комапаний</h5>#}
+{#            </div>#}
+{##}
+{#        <div class="col-xl-12 col-md-6">#}
+{#        <div class="card Recent-Users">#}
+{#            <div class="card-header">#}
+{#                <h5>Статистика</h5>#}
+{#            </div>#}
+{#            <div class="card-block px-0 py-3">#}
+{#                <div class="table-responsive">#}
+{#                    <table class="table table-hover">#}
+{#                        <tbody>#}
+{#                        {% for i, j in ml %}#}
+{#                            <tr class="unread">#}
+{#                                <td>#}
+{#                                    <h1>{{ compa.com }}</h1>#}
+{#                                </td>#}
+{#                            </tr>#}
+{##}
+{#                            </tbody>#}
+{##}
+{#                        {% endfor %}#}
+{#                    </table>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+                        {% if request.user.role.name == 'logist' %}
+                            <div class="p-50">
+                                    <h3>Список Компаний</h3>
+            <div class="card-block px-0 py-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                            <thead class="text-primary">
+                            <th>
+                               #
+                            </th>
+                            <th>
+                                Компания
+                            </th>
+                            <th>
+                                Адресс
+                            </th>
+                            <th>
+                                Всего сделано
+                                заказов
+                            </th>
+{#                            <th>#}
+{#                                Дата рождения#}
+{#                            </th>#}
+                            </thead>
+                        <tbody>
+                            {% for i,j in ml %}
+                                <tr class="unread">
+                                    <a href="">
+                                        <td><img class="rounded-circle"
+                                                 style="width:40px;"
+                                                 src="/static/assets/images/user/avatar-1.jpg"
+                                                 alt="activity-user"></td>
+                                        <td>
+                                    </a>
+                                    {#                                <a href="{% url 'check-zakaz' pk=i.pk %}">#}
+                                    <h6 class="mb-1">{{ i.name }}</h6>
+                                    {#                                </a>#}
+                                    </td>
+
+                                    {#                        {% for i in clients %}#}
+
+                                    <td>
+                                        <h6 class="text-muted"><i
+                                                class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ i.address }}
+                                        </h6>
+                                    </td>
+
+                                    <td>
+                                        <h6 class="text-muted"><i
+                                                class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ j.com }}
+                                        </h6>
+                                    </td>
+                                    {#                        {% endfor %}#}
+                                    <td>
+                                        <a href="{% url 'delete-company' pk=i.pk %}"
+                                           style="color: red;">
+                                            <div class="d-flex justify-content-center">
+                                                <button class="btn btn-info"
+                                                        type="submit">Удалить
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>                 {% endfor %}
+
+                        {% endif %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

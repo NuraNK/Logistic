@@ -1,0 +1,116 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} UI Badges {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="col-xl-12 col-md-6 p-50">
+        <div class="card Recent-Users">
+            <div class="card-header">
+{#                <h5>Recent Users</h5>#}
+            </div>
+            <h2 class="h5 mb-4">Общая информация</h2>
+            {% if success %}
+                <div class="alert alert-success" role="alert">
+                    {{ success }}
+                </div>
+            {% endif %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div>
+                            <label for="first_name">Имя</label>
+                            <input class="form-control"
+                                   id="first_name"
+                                   name="first_name"
+                                   type="text"
+                                   value="{{ request.user.first_name }}"
+                                   required>
+                        </div>
+                    </div>
+                     <div class="col-md-6 mb-3">
+                        <div>
+                            <label for="first_name">email</label>
+                            <input class="form-control"
+                                   id="email"
+                                   name="email"
+                                   type="email"
+                                   value="{{ request.user.email }}"
+                                   disabled>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div>
+                            <label for="last_name">Фамилия</label>
+                            <input class="form-control"
+                                   id="last_name"
+                                   name="last_name"
+                                   type="text"
+                                   value="{{ request.user.last_name }}"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3">
+                        <label for="birthday">Роль</label>
+                        <div class="input-group">
+                            <input class="form-control" id="birthday"
+                                   type="text"
+                                   value="{{ request.user.role.name }}"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="birthday">Компания</label>
+                        <div class="input-group">
+                            <input class="form-control" id="birthday"
+                                   type="text"
+                                   value="{{ request.user.company.name }}"
+                                   disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-gray-800 mt-2 animate-up-2"
+                            type="submit">Сохранить все
+                    </button>
+                </div>
+            </form>
+            {% if not request.user.company.name %}
+                            <form method="post"
+                  action="{% url 'create-company' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            {% for form in company %}
+                                <p class="">{{ form.as_p }}</p>
+                            {% endfor %}
+                            <div class="mt-3">
+                                <button class="btn btn-gray-800 mt-2 animate-up-2"
+                                        type="submit">Создать компанию
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+
+
+        </div>
+        </form>
+    </div>
+    </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
